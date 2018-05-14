@@ -19,10 +19,11 @@ public class Movimentacao {
 		this.valor = valor;
 		
 		//set default time zone to Sao Paulo
-		TimeZone tz = TimeZone.getTimeZone("America/Sao_Paulo");
-		TimeZone.setDefault(tz);
+//		TimeZone tz = TimeZone.getTimeZone("America/Sao_Paulo");
+//		TimeZone.setDefault(tz);
 		//set dataMOv to actual time on timezone tz
-		this.dataMov = new GregorianCalendar(tz);
+		
+		this.dataMov = new GregorianCalendar();
 	}
 
 	public GregorianCalendar getDataMov() {

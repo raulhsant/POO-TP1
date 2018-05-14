@@ -1,0 +1,7 @@
+	Implementar métodos de leitura e gravação em arquivo.
+	
+	Montar Interface com WindowBuilder
+	
+	Criar método main de teste para checar se todos os métodos funcionam
+	
+	Remover "return null" das funções caso as mesmas funcionem para evitar NullPointerException. 

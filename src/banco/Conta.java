@@ -1,8 +1,11 @@
 package banco;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class Conta {
 	
@@ -81,14 +84,31 @@ public class Conta {
 		return toReturnList;
 	}
 	
+	//from start date to TODAY
 	public List<Movimentacao> getExtract (GregorianCalendar startDate){
 		return getExtract(startDate, new GregorianCalendar());
 	}
 	
-	//TODO
 	//get extract from current month
 	public List<Movimentacao> getExtract(){
-		return null;
+//		 	TimeZone tz = TimeZone.getTimeZone("America/Sao_Paulo");
+//			TimeZone.setDefault(tz);
+		    GregorianCalendar actualDate = new GregorianCalendar();
+			int month = actualDate.get(GregorianCalendar.MONTH);
+//		    LocalDate localDate = actualDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//		    int month = actualDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue();
+		    
+		    List<Movimentacao> toReturn =  new ArrayList<Movimentacao>();
+		    
+		    for (Movimentacao mov : this.movimentacoes) {
+		    	//Checks if movimentacao mov was in the current month
+//		    	if (month == mov.getDataMov().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue()) {
+		    	if(month == mov.getDataMov().get(GregorianCalendar.MONTH)) {
+		    		toReturn.add(mov);
+		    	}
+		    }
+		    
+	    	return toReturn;	    
 	}
 	
 	

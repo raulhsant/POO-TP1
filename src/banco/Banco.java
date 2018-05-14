@@ -1,9 +1,25 @@
 package banco;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Banco {
+public class Banco implements Serializable{
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4106517860187051559L;
+	
 	
 	private String nomeBanco;
 	private List <Cliente> clientes;
@@ -13,6 +29,9 @@ public class Banco {
 	public Banco(String nomeBanco) {
 		super();
 		this.nomeBanco = nomeBanco;
+		this.contas =  new ArrayList<Conta>();
+		this.clientes =  new ArrayList<Cliente>();
+		
 	}
 	
 	public void addClient(Cliente cliente) {
@@ -22,6 +41,9 @@ public class Banco {
 	public void newAccount(Cliente cliente) {
 		Conta conta = new Conta(cliente);
 		this.contas.add(conta);
+		if(!this.clientes.contains(cliente)) {
+			this.clientes.add(cliente);
+		}
 	}
 	
 	public Boolean removeClient(String cpfCnpj) {
@@ -133,7 +155,118 @@ public class Banco {
 		return nomeBanco;
 	}
 	
+	//Saves one bank to file Banco
+	public void writeFile() {
+		
+		try {
+			FileOutputStream f = new FileOutputStream(new File("Banco.txt"));
+			ObjectOutputStream o = new ObjectOutputStream(f);
+
+			// Write objects to file
+			o.writeObject(this);
+
+			o.close();
+			f.close();
+		} catch (IOException e) {
+			System.out.println("Error initializing stream");
+		}
+	}
+	
+	public Banco readFile() {
+		
+		try {
+			FileInputStream fi = new FileInputStream(new File("Banco.txt"));
+			ObjectInputStream oi = new ObjectInputStream(fi);
+	
+			// Read objects
+			Banco banco = (Banco) oi.readObject();
+	
+			oi.close();
+			fi.close();
+			
+			return banco;
+	
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch (IOException e) {
+			System.out.println("Error initializing stream");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+//	//To save multiple banks to file
+//	public void writeFile(List<Banco> bancos) {
+//		
+//		try {
+//			FileOutputStream f = new FileOutputStream(new File("BancosAll.txt"));
+//			ObjectOutputStream o = new ObjectOutputStream(f);
+//			for (Banco banco : bancos) {
+//				// Write objects to file
+//				o.writeObject(banco);
+//			}
+//			o.close();
+//			f.close();
+//		} catch (IOException e) {
+//			System.out.println("Error initializing stream");
+//		}
+//	}
+//	//Save the names of the banks to file
+//	public void writeFile(List<String> bancosNomes, Boolean justNames) {
+//		
+//		try {
+//			FileOutputStream f = new FileOutputStream(new File("ListBancos.txt"));
+//			ObjectOutputStream o = new ObjectOutputStream(f);
+//
+//			// Write objects to file
+//			o.writeObject(bancosNomes);
+//
+//			o.close();
+//			f.close();
+//		} catch (IOException e) {
+//			System.out.println("Error initializing stream");
+//		}
+//	}
+	
 	//TODO: Implementar métodos de leitura e gravação em arquivo.
+	
+//	public static void main(String[] args) {
+//
+//		Banco b1 = new Banco("TesteBanco");
+//		b1.newAccount(new Cliente("José", "11122233345", "Rua do carai", "123456789"));
+//
+//		try {
+//			FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
+//			ObjectOutputStream o = new ObjectOutputStream(f);
+//
+//			// Write objects to file
+//			o.writeObject(b1);
+//
+//			o.close();
+//			f.close();
+//
+//			FileInputStream fi = new FileInputStream(new File("myObjects.txt"));
+//			ObjectInputStream oi = new ObjectInputStream(fi);
+//
+//			// Read objects
+//			Banco br1 = (Banco) oi.readObject();
+//
+//			System.out.println(br1);
+//
+//
+//			oi.close();
+//			fi.close();
+//
+//		} catch (FileNotFoundException e) {
+//			System.out.println("File not found");
+//		} catch (IOException e) {
+//			System.out.println("Error initializing stream");
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 //	public void setNomeBanco(String nomeBanco) {
 //		this.nomeBanco = nomeBanco;

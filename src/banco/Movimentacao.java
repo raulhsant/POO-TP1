@@ -1,9 +1,10 @@
 package banco;
 
+//import java.io.Serializable;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
+//import java.util.TimeZone;
 
-public class Movimentacao {
+public class Movimentacao{
 	
 	private GregorianCalendar dataMov;
 	private String descricao;

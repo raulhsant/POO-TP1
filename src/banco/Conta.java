@@ -1,13 +1,14 @@
 package banco;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.io.Serializable;
+//import java.time.LocalDate;
+//import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TimeZone;
+//import java.util.TimeZone;
 
-public class Conta {
+public class Conta implements Serializable{
 	
 	private int numConta;
 	private double saldo;

@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3922927079725575913L;
+	
 	private String nomeCliente;
 	private String cpfCnpj;
 	private String endereco;

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class Banco implements Serializable{
 	
 
@@ -34,6 +36,10 @@ public class Banco implements Serializable{
 		
 	}
 	
+	public Banco() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void addClient(Cliente cliente) {
 		this.clientes.add(cliente);
 	}
@@ -172,10 +178,10 @@ public class Banco implements Serializable{
 		}
 	}
 	
-	public Banco readFile() {
+	public static Banco readFile() {
 		
 		try {
-			FileInputStream fi = new FileInputStream(new File("Banco.txt"));
+			FileInputStream fi = new FileInputStream(new File("BankData.dat"));
 			ObjectInputStream oi = new ObjectInputStream(fi);
 	
 			// Read objects
@@ -190,10 +196,33 @@ public class Banco implements Serializable{
 			System.out.println("File not found");
 		} catch (IOException e) {
 			System.out.println("Error initializing stream");
+			if (createBankObjectWithDefaultName())
+			System.out.println("Default Bank Created. Try again!");
+			JOptionPane.showMessageDialog(null, "Banco padrão criado.", "Erro ao iniciar banco", 1);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static Boolean createBankObjectWithDefaultName() {
+		
+		Banco b1 = new Banco("Meu Banco");
+		
+		try {
+			FileOutputStream f = new FileOutputStream(new File("BankData.dat"));
+			ObjectOutputStream o = new ObjectOutputStream(f);
+
+			// Write objects to file
+			o.writeObject(b1);
+
+			o.close();
+			f.close();
+			return true;
+		} catch (IOException e) {
+			System.out.println("Error initializing stream");
+			return false;
+		}
 	}
 	
 //	//To save multiple banks to file
@@ -231,45 +260,45 @@ public class Banco implements Serializable{
 	
 	//TODO: Implementar métodos de leitura e gravação em arquivo.
 	
-//	public static void main(String[] args) {
-//
-//		Banco b1 = new Banco("TesteBanco");
-//		b1.newAccount(new Cliente("José", "11122233345", "Rua do carai", "123456789"));
-//
-//		try {
-//			FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
-//			ObjectOutputStream o = new ObjectOutputStream(f);
-//
-//			// Write objects to file
-//			o.writeObject(b1);
-//
-//			o.close();
-//			f.close();
-//
-//			FileInputStream fi = new FileInputStream(new File("myObjects.txt"));
-//			ObjectInputStream oi = new ObjectInputStream(fi);
-//
-//			// Read objects
-//			Banco br1 = (Banco) oi.readObject();
-//
-//			System.out.println(br1);
-//
-//
-//			oi.close();
-//			fi.close();
-//
-//		} catch (FileNotFoundException e) {
-//			System.out.println("File not found");
-//		} catch (IOException e) {
-//			System.out.println("Error initializing stream");
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
+//		public static void main(String[] args) {
+//	
+//			Banco b1 = new Banco("TesteBanco");
+//			b1.newAccount(new Cliente("José", "11122233345", "Rua do carai", "123456789"));
+//	
+//			try {
+//				FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
+//				ObjectOutputStream o = new ObjectOutputStream(f);
+//	
+//				// Write objects to file
+//				o.writeObject(b1);
+//	
+//				o.close();
+//				f.close();
+//	
+//				FileInputStream fi = new FileInputStream(new File("myObjects.txt"));
+//				ObjectInputStream oi = new ObjectInputStream(fi);
+//	
+//				// Read objects
+//				Banco br1 = (Banco) oi.readObject();
+//	
+//				System.out.println(br1);
+//	
+//	
+//				oi.close();
+//				fi.close();
+//	
+//			} catch (FileNotFoundException e) {
+//				System.out.println("File not found");
+//			} catch (IOException e) {
+//				System.out.println("Error initializing stream");
+//			} catch (ClassNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 //		}
-//	}
 
-//	public void setNomeBanco(String nomeBanco) {
-//		this.nomeBanco = nomeBanco;
-//	}
+		public void setNomeBanco(String nomeBanco) {
+			this.nomeBanco = nomeBanco;
+		}
 	
 }

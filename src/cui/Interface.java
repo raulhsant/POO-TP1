@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import banco.Banco;
 import banco.Cliente;
+import banco.Conta;
 
 public class Interface {
 	
@@ -123,8 +124,8 @@ public class Interface {
 				
 				banco.addClient(client);		
 				
-				System.out.println(String.format("Cliente %s adicionado com sucesso. \nPressione ENTER para continuar", nome));
-				in.nextLine();
+				System.out.println(String.format("\nCliente %s adicionado com sucesso. \nPressione ENTER para continuar", nome));
+//				in.nextLine();
 				
 			} else if (whatToDo == 2) {
 				//asks for cpf to delete
@@ -145,42 +146,91 @@ public class Interface {
 ////						}	
 //				}
 				if(removed == false)
-					System.out.println("Cliente não encontrado ou não pode ser removido.\nPressione ENTER para continuar");
+					System.out.println("\nCliente não encontrado ou não pode ser removido.\nPressione ENTER para continuar");
 				else
-					System.out.println("Cliente removido com sucesso.\nPressione ENTER para continuar");
-				in.nextLine();
+					System.out.println("\nCliente removido com sucesso.\nPressione ENTER para continuar");
+//				in.nextLine();
 				
 			} else if (whatToDo == 3) {
 				//asks for nothing, shows list
 				List<Cliente> clientList = banco.getClientes();
-				System.out.println(String.format("\nClientes do banco %s", banco.getNomeBanco()));
+				String trace = new String(new char[ 42 ]).replace('\0', '-');
 				
-				String trace = new String(new char[ 32 ]).replace('\0', '-');
 				
+				System.out.print("");
+				System.out.println(trace);
+				System.out.println(String.format("Clientes do banco %s", banco.getNomeBanco()));
+								
 				for (Cliente client : clientList) {
 					System.out.println(trace);
+
 					System.out.printf("Nome: %s \t CPF/CNPJ: %s\n", client.getNomeCliente(), client.getCpfCnpj());
 					System.out.printf("Endereço: %s\n", client.getEndereco());
 					System.out.printf("Telefone: %s\n", client.getFone());
 				}
 				
 				System.out.println(trace);
-				System.out.println("Pressione ENTER para continuar");
-				in.nextLine();
+				System.out.println("\nPressione ENTER para continuar");
+//				in.nextLine();
 			}
 			
 		} else if (selectedOption == 2) {
 			if(whatToDo == 1) {
 				//asks for data to add
+			System.out.println("\nFavor digitar os CPF/CNPJ do Cliente para o qual será criada a conta");
+			in.nextLine();
+			System.out.printf("CPF/CNPJ: ");
+			String cpf = in.nextLine();
+			
+			List <Cliente> clientList = banco.getClientes();
+			
+			for(Cliente client : clientList) {
+				if(client.getCpfCnpj().equals(cpf)) {
+					banco.newAccount(client);
+					System.out.printf("Nova conta criada para o cliente %s\n", client.getNomeCliente());
+				}
+			}
+			
+			System.out.println("Pressione ENTER para continuar.");
+			
 			} else if (whatToDo == 2) {
-				//asks for ? to delete
+				//asks for data to delete
+				
+			System.out.println("\nFavor digitar o numero da Conta a ser removida.");
+			in.nextLine();
+			System.out.printf("Conta nº: ");
+			Integer id = in.nextInt();
+				
+			banco.removeAccount(id);
+			
+			System.out.printf("Conta removida com sucesso\n");
+			
+			System.out.println("Pressione ENTER para continuar.");
 			} else if (whatToDo == 3) {
 				//asks for nothing, shows list
+				
+			List<Conta> contaList = banco.getContas();
+			String trace = new String(new char[ 42 ]).replace('\0', '-');
+						
+			System.out.print("");
+			System.out.println(trace);
+			System.out.println(String.format("Contas do banco %s", banco.getNomeBanco()));
+							
+			for (Conta conta : contaList) {
+				System.out.println(trace);
+
+				System.out.printf("Conta nº: %d    Saldo: %.2f\n", conta.getNumConta(), conta.getSaldo());
+				System.out.printf("Cliente: %s\n", conta.getCliente().getCpfCnpj());
+				System.out.printf("Número de Movimentações: %d\n", conta.getMovimentacoes().size());
 			}
-		} else if(selectedOption == 0) {
 			
-			System.out.println("Pressione ENTER para continuar");
-			in.nextLine();
+			System.out.println(trace);
+			System.out.println("\nPressione ENTER para continuar");
+				
+			}
+		} else if(selectedOption == 0) {			
+			System.out.println("\nPressione ENTER para continuar");
+//			in.nextLine();
 		} else {
 			System.out.println("Não foi possível identificar a opção digitada, tente novamente.");
 			try {
@@ -247,10 +297,10 @@ public class Interface {
 		linhas.add(trace);
 		
 		
-		whitespace = new String(new char[ (linhas.get(0).length())/2 - 5 ]).replace('\0', ' ');
+		whitespace = new String(new char[ (linhas.get(0).length())/2 - 15 ]).replace('\0', ' ');
 
 		linhas.add(traceAux);
-		linhas.add("|" + whitespace +  " 0 - Sair" + whitespace + "|");
+		linhas.add("|" + whitespace +  " 0 - Sair e Salvar Alterações" + whitespace + "|");
 		linhas.add(trace);
 		
 //		System.out.println(traceAux);

@@ -55,7 +55,7 @@ public class Banco implements Serializable{
 	public Boolean removeClient(String cpfCnpj) {
 		Boolean canBeRemoved = true;
 		for (Conta conta : this.contas) {
-			if(conta.getCliente().getCpfCnpj() == cpfCnpj) {
+			if(conta.getCliente().getCpfCnpj().equals(cpfCnpj)) {
 				System.out.println(String.format("O Cliente não pode ser exlcuido pois possui a conta %d. ", conta.getNumConta()));
 				canBeRemoved =  false;
 			}

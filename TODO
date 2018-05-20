@@ -6,6 +6,8 @@
 	
 	Criar CUI para utilização via console.
 	
+	COLOCAR OPÇÃO PARA VOLTAR EM QUALQUER PASSO DA UTILIZAÇÃO!
+	
 	
 	Remover "return null" das funções caso as mesmas funcionem para evitar NullPointerException.
 	

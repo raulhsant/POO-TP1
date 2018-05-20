@@ -22,6 +22,7 @@ import banco.Banco;
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
 
 
 public class Interface extends JFrame {
@@ -38,19 +39,19 @@ public class Interface extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Interface frame = new Interface();
-					frame.setVisible(true);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Interface frame = new Interface();
+//					frame.setVisible(true);
+//					
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -69,11 +70,13 @@ public class Interface extends JFrame {
 		this.setTitle(String.format("Banco : %s", banco.getNomeBanco()));
 		
 		setBackground(Color.LIGHT_GRAY);
+		//TODO: Change It to show an alert windows informing to click sair to leave
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
 		
 	}
+	
+	
+	
 	
 	
 }

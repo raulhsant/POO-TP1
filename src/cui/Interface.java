@@ -8,18 +8,21 @@ import java.util.List;
 import java.util.Scanner;
 
 import banco.Banco;
+import banco.Cliente;
 
 public class Interface {
 	
+	private static Banco banco;
 	
 	public static void main(String[] args) {
 		
 //		System.out.println("Running");
 		Interface inter =  new Interface();
-		Banco banco = Banco.readFile();
-		Scanner in = new Scanner(System.in);
+		banco = Banco.readFile();
 		int selectedOption;
 		Boolean close =  false;
+		
+		Scanner in = new Scanner(System.in);
 		
 		
 		while (!close) {
@@ -27,26 +30,58 @@ public class Interface {
 			inter.WriteMenu();
 			
 			System.out.printf("\nDigite o número da atividade desejada: ");
+			
 			selectedOption = in.nextInt();
 			
 			switch(selectedOption) {
 				default:
-					System.out.println("Não foi possível identificar a opção digitada, tente novamente.");
+					System.out.println("Não foi possível identificar a opção digitada. Pressione ENTER e tente novamente.");
 					try {
 						System.in.read();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					break;
+				break;
 				
 				case 0:
 					System.out.println("\nSalvando alterações...");
 					close = true;
 					banco.writeFile();
 					System.out.println("Alterações salvas com sucesso!\n");
-					System.out.println("\tAté logo.");
-					break;
+					System.out.println("\tAté logo!");
+				break;
+					
+				case 1:
+					inter.WriteClientAccountMenu("Adicionar", 1);
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				break;
+					
+				case 2:
+					inter.WriteClientAccountMenu("Remover", 2);
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				break;
+				
+				case 3:
+					inter.WriteClientAccountMenu("Listar", 3);
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				break;
+					
 
 			}
 			
@@ -55,7 +90,112 @@ public class Interface {
 	}
 	
 	
+	private void WriteClientAccountMenu(String action, int whatToDo) {
+		@SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
+		int selectedOption;
+		
+		System.out.println(String.format("\nVocê deseja %s: ", action));
+		System.out.println("1 - Cliente\n2 - Conta\n0 - Voltar");
+		
+		selectedOption = in.nextInt();
+		
+		if(selectedOption == 1) {
+			if(whatToDo == 1) {
+				//asks for data to add
+				System.out.println("\nFavor digitar os dados do Cliente a ser adicionado.");
+				
+				in.nextLine();
+				
+				System.out.printf("Nome: ");
+				String nome = in.nextLine();
+				
+				System.out.printf("CPF/CNPJ: ");
+				String cpf = in.nextLine();
+				
+				System.out.printf("Endereço: ");
+				String end = in.nextLine();
+				
+				System.out.printf("Telefone: ");
+				String tel = in.nextLine();
+				
+				Cliente client = new Cliente(nome, cpf, end, tel);
+				
+				banco.addClient(client);		
+				
+				System.out.println(String.format("Cliente %s adicionado com sucesso. \nPressione ENTER para continuar", nome));
+				in.nextLine();
+				
+			} else if (whatToDo == 2) {
+				//asks for cpf to delete
+				System.out.println("\nFavor digitar os CPF/CNPJ do Cliente a ser removido.");
+				in.nextLine();
+				System.out.printf("CPF/CNPJ: ");
+				String cpf = in.nextLine();
+			
+//				List<Cliente> clientList = banco.getClientes();
+				
+				Boolean removed = banco.removeClient(cpf);
+				
+//				for (Cliente client : clientList) {
+//					if(client.getCpfCnpj().equals(cpf))
+//						System.out.println(String.format("Cliente %s removido com sucesso. \nPressione ENTER para continuar", client.getNomeCliente()));
+////						else {
+////							System.out.printf("Deu ruim %s\n", client.getCpfCnpj());
+////						}	
+//				}
+				if(removed == false)
+					System.out.println("Cliente não encontrado ou não pode ser removido.\nPressione ENTER para continuar");
+				else
+					System.out.println("Cliente removido com sucesso.\nPressione ENTER para continuar");
+				in.nextLine();
+				
+			} else if (whatToDo == 3) {
+				//asks for nothing, shows list
+				List<Cliente> clientList = banco.getClientes();
+				System.out.println(String.format("\nClientes do banco %s", banco.getNomeBanco()));
+				
+				String trace = new String(new char[ 32 ]).replace('\0', '-');
+				
+				for (Cliente client : clientList) {
+					System.out.println(trace);
+					System.out.printf("Nome: %s \t CPF/CNPJ: %s\n", client.getNomeCliente(), client.getCpfCnpj());
+					System.out.printf("Endereço: %s\n", client.getEndereco());
+					System.out.printf("Telefone: %s\n", client.getFone());
+				}
+				
+				System.out.println(trace);
+				System.out.println("Pressione ENTER para continuar");
+				in.nextLine();
+			}
+			
+		} else if (selectedOption == 2) {
+			if(whatToDo == 1) {
+				//asks for data to add
+			} else if (whatToDo == 2) {
+				//asks for ? to delete
+			} else if (whatToDo == 3) {
+				//asks for nothing, shows list
+			}
+		} else if(selectedOption == 0) {
+			
+			System.out.println("Pressione ENTER para continuar");
+			in.nextLine();
+		} else {
+			System.out.println("Não foi possível identificar a opção digitada, tente novamente.");
+			try {
+				System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+
 	public void WriteMenu() {
+		System.out.println(new String(new char[ 55 ]).replace('\0', '_'));
 		System.out.println("O que você deseja?\n");
 		
 //		System.out.println("\tAdicionar:\n 1 - Cliente\t 2 - Conta\n");

@@ -165,7 +165,7 @@ public class Banco implements Serializable{
 	public void writeFile() {
 		
 		try {
-			FileOutputStream f = new FileOutputStream(new File("Banco.txt"));
+			FileOutputStream f = new FileOutputStream(new File("BankData.dat"));
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
 			// Write objects to file

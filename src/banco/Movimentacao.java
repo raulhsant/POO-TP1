@@ -1,10 +1,16 @@
 package banco;
 
+import java.io.Serializable;
 //import java.io.Serializable;
 import java.util.GregorianCalendar;
 //import java.util.TimeZone;
 
-public class Movimentacao{
+public class Movimentacao implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5174883492986915668L;
 	
 	private GregorianCalendar dataMov;
 	private String descricao;

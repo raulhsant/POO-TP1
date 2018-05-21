@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 
 public class Banco implements Serializable{
 	
@@ -36,9 +35,9 @@ public class Banco implements Serializable{
 		
 	}
 	
-	public Banco() {
-		// TODO Auto-generated constructor stub
-	}
+//	public Banco() {
+//		// TODO Auto-generated constructor stub
+//	}
 
 	public void addClient(Cliente cliente) {
 		this.clientes.add(cliente);
@@ -53,7 +52,9 @@ public class Banco implements Serializable{
 	}
 	
 	public Boolean removeClient(String cpfCnpj) {
+		
 		Boolean canBeRemoved = true;
+		
 		for (Conta conta : this.contas) {
 			if(conta.getCliente().getCpfCnpj().equals(cpfCnpj)) {
 				System.out.println(String.format("O Cliente não pode ser exlcuido pois possui a conta %d. ", conta.getNumConta()));
@@ -61,7 +62,7 @@ public class Banco implements Serializable{
 			}
 		}
 		
-		if (canBeRemoved = true) {
+		if (canBeRemoved == true) {
 			this.clientes.removeIf(cl -> cl.getCpfCnpj().equals(cpfCnpj));
 			return true;
 		}
@@ -73,9 +74,12 @@ public class Banco implements Serializable{
 	}
 	
 	public void makeDeposit(int id, double value) {
+		
 		for (Conta conta : this.contas) {
 			if (conta.getNumConta() == id) {
 				conta.toCredit(value, "Depósito");
+				
+				System.out.println(String.format("Depósito de %.2f efetuado na conta %d", value, id));
 			}
 		}	
 	}
@@ -176,8 +180,11 @@ public class Banco implements Serializable{
 
 			o.close();
 			f.close();
+			System.out.println("Alterações salvas com sucesso!\n");
+			
 		} catch (IOException e) {
 			System.out.println("Error initializing stream");
+			System.out.println("\nNão foi possível salvar as alterações!\n");
 		}
 	}
 	
@@ -199,9 +206,9 @@ public class Banco implements Serializable{
 			System.out.println("File not found");
 		} catch (IOException e) {
 			System.out.println("Error initializing stream");
-			if (createBankObjectWithDefaultName())
-			System.out.println("Default Bank Created. Try again!");
-			JOptionPane.showMessageDialog(null, "Banco padrão criado.", "Erro ao iniciar banco", 1);
+//			if (createBankObjectWithDefaultName())
+//			System.out.println("Default Bank Created. Try again!");
+//			JOptionPane.showMessageDialog(null, "Banco padrão criado.", "Erro ao iniciar banco", 1);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

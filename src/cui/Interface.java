@@ -1,7 +1,6 @@
 package cui;
 
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,7 @@ public class Interface {
 	
 	private static Banco banco;
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
 //		System.out.println("Running");
@@ -43,15 +43,14 @@ public class Interface {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				break;
+					break;
 				
 				case 0:
 					System.out.println("\nSalvando alterações...");
 					close = true;
 					banco.writeFile();
-					System.out.println("Alterações salvas com sucesso!\n");
 					System.out.println("\tAté logo!");
-				break;
+					break;
 					
 				case 1:
 					inter.WriteClientAccountMenu("Adicionar", 1);
@@ -61,7 +60,7 @@ public class Interface {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				break;
+					break;
 					
 				case 2:
 					inter.WriteClientAccountMenu("Remover", 2);
@@ -71,7 +70,7 @@ public class Interface {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				break;
+					break;
 				
 				case 3:
 					inter.WriteClientAccountMenu("Listar", 3);
@@ -81,8 +80,46 @@ public class Interface {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				break;
+					break;
+				
+				case 4:
+					inter.WriteExecuteMenu("Dep");
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;	
 					
+				case 5:
+					inter.WriteExecuteMenu("Saq");
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case 6:
+					inter.WriteExecuteMenu("Transf");
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case 7:
+					break;
+					
+				case 8:
+					break;
+				
+				case 9:
+					break;
 
 			}
 			
@@ -91,8 +128,47 @@ public class Interface {
 	}
 	
 	
+	
+	@SuppressWarnings("resource")
+	private void WriteExecuteMenu(String method) {
+		Scanner in = new Scanner(System.in);
+		
+		if (method.equals("Dep")) {
+			
+			System.out.println("\nEm qual conta e de quanto é o depósito?");
+			System.out.printf("Conta nº: ");
+			
+			int contaId = in.nextInt();
+			System.out.printf("Valor do depósito (xx,xx): ");
+			double valor = in.nextDouble();
+			
+			System.out.println("");
+			
+			banco.makeDeposit(contaId, valor);
+
+			System.out.println("Pressione ENTER para continuar");			
+			
+			
+		} else if (method.equals("Saq")) {
+			
+		}else if (method.equals("Transf")) {
+			
+		}else {
+			System.out.println("\nMétodo não identificado!\n");
+			try {
+				System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+	@SuppressWarnings("resource")
 	private void WriteClientAccountMenu(String action, int whatToDo) {
-		@SuppressWarnings("resource")
+
 		Scanner in = new Scanner(System.in);
 		int selectedOption;
 		
@@ -187,7 +263,7 @@ public class Interface {
 			for(Cliente client : clientList) {
 				if(client.getCpfCnpj().equals(cpf)) {
 					banco.newAccount(client);
-					System.out.printf("Nova conta criada para o cliente %s\n", client.getNomeCliente());
+					System.out.printf("\nNova conta criada para o cliente %s\n", client.getNomeCliente());
 				}
 			}
 			
@@ -244,7 +320,7 @@ public class Interface {
 	}
 
 
-	public void WriteMenu() {
+	private void WriteMenu() {
 		System.out.println(new String(new char[ 55 ]).replace('\0', '_'));
 		System.out.println("O que você deseja?\n");
 		
@@ -322,8 +398,6 @@ public class Interface {
 		
 		for(String line : linhas)
 			System.out.println(line);
-	
-		
 	}
 
 }

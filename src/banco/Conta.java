@@ -10,13 +10,18 @@ import java.util.List;
 
 public class Conta implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 577928927645938285L;
+	
 	private int numConta;
 	private double saldo;
 	private Cliente cliente;
 	private List<Movimentacao> movimentacoes;
 
 	//Maybe wont work this way
-	private static int proxNumConta = 0;
+	private static int proxNumConta = 1;
 	
 	
 	//TODO: Implements other methods
@@ -50,6 +55,7 @@ public class Conta implements Serializable{
 		return proxNumConta;
 	}
 	
+	@SuppressWarnings("null")
 	public double toDebit(double valor, String descricao) {
 		if (this.saldo - valor >= 0) {
 			Movimentacao mov = new Movimentacao(descricao, 'D', valor);
@@ -66,10 +72,8 @@ public class Conta implements Serializable{
 	public double toCredit(double valor, String descricao) {
 
 			Movimentacao mov = new Movimentacao(descricao, 'C', valor);
-			movimentacoes.add(mov);
-			
+			this.movimentacoes.add(mov);
 			this.saldo += valor;
-			
 			return this.saldo;
 	}
 	

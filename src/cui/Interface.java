@@ -148,10 +148,39 @@ public class Interface {
 
 			System.out.println("Pressione ENTER para continuar");			
 			
-			
 		} else if (method.equals("Saq")) {
 			
+			System.out.println("\nDe qual conta e de quanto é o saque?");
+			System.out.printf("Conta nº: ");
+			
+			int contaId = in.nextInt();
+			System.out.printf("Valor do saque (xx,xx): ");
+			double valor = in.nextDouble();
+			
+			System.out.println("");
+			
+			banco.makeWithdraw(contaId, valor);
+
+			System.out.println("Pressione ENTER para continuar");
+			
 		}else if (method.equals("Transf")) {
+			
+			System.out.println("\nDe qual conta, para qual conta e de quanto é a transferência?");
+			
+			System.out.printf("De conta nº: ");
+			int contaFromId = in.nextInt();
+			
+			System.out.printf("Para conta nº: ");
+			int contaToId = in.nextInt();
+			
+			System.out.printf("Valor(xx,xx): ");
+			double valor = in.nextDouble();
+			
+			System.out.println("");
+			
+			banco.makeTransfer(contaFromId, contaToId, valor);
+			
+			System.out.println("Pressione ENTER para continuar");
 			
 		}else {
 			System.out.println("\nMétodo não identificado!\n");

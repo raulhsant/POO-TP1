@@ -23,7 +23,9 @@ public class Conta implements Serializable{
 	//Maybe wont work this way
 	private static int proxNumConta = 1;
 	
-	
+	public static void setproxNumConta(int numContas) {
+		proxNumConta = numContas+1; 
+	}
 	//TODO: Implements other methods
 	
 	public Conta(Cliente cliente) {
@@ -33,6 +35,10 @@ public class Conta implements Serializable{
 		this.numConta = proxNumConta;
 		this.movimentacoes = new ArrayList<Movimentacao>();
 		proxNumConta++;
+	}
+
+	public Conta() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getNumConta() {

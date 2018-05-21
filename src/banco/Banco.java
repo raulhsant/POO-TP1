@@ -88,21 +88,38 @@ public class Banco implements Serializable{
 		for (Conta conta : this.contas) {
 			if (conta.getNumConta() == id) {
 				conta.toDebit(value, "Saque");
+				
+				System.out.println(String.format("Saque de %.2f efetuado na conta %d", value, id));
 			}
 		}	
 	}
 	
 	public void makeTransfer(int idFrom, int idTo, double value) {
-		for (Conta contaFrom : this.contas) {
-			if (contaFrom.getNumConta() == idFrom) {
-				for (Conta contaTo : this.contas) {
-					if(contaTo.getNumConta() == idTo ) {
-						contaFrom.toDebit(value, String.format("Transferência para conta %d", contaTo.getNumConta()));
-						contaTo.toCredit(value, String.format("Transferência da conta %d", contaFrom.getNumConta()));
-					}
+		
+		Conta contaTo = new Conta();
+		Conta contaFrom = new Conta();
+		for (Conta conta : this.contas) {
+			if (conta.getNumConta() == idFrom ) {
+				contaFrom = conta;
+				
+				if (contaTo.getNumConta() != 0) {
+					contaFrom.toDebit(value, String.format("Transferência para conta %d", contaTo.getNumConta()));
+					contaTo.toCredit(value, String.format("Transferência da conta %d", contaFrom.getNumConta()));
+					
+					System.out.println(String.format("Transferência de %.2f efetuada da conta %d para a conta %d", value, idFrom, idTo));
+				}
+			} else if (conta.getNumConta() == idTo) {
+				contaTo = conta;
+				
+				if (contaFrom.getNumConta() != 0) {
+					contaFrom.toDebit(value, String.format("Transferência para conta %d", contaTo.getNumConta()));
+					contaTo.toCredit(value, String.format("Transferência da conta %d", contaFrom.getNumConta()));
+					
+					System.out.println(String.format("Transferência de %.2f efetuada da conta %d para a conta %d", value, idFrom, idTo));
 				}
 			}
-		}	
+		}
+			
 	}
 	
 	public void bankRatePayment() {
@@ -200,6 +217,7 @@ public class Banco implements Serializable{
 			oi.close();
 			fi.close();
 			
+			Conta.setproxNumConta(banco.getContas().get(banco.getContas().size() - 1).getNumConta());
 			return banco;
 	
 		} catch (FileNotFoundException e) {

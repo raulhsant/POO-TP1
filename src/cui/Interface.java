@@ -28,7 +28,7 @@ public class Interface {
 		
 		while (!close) {
 	//		System.out.println(String.format("Informações do banco \"%s\" carregadas com sucesso.", banco.getNomeBanco()));
-			inter.WriteMenu();
+			inter.writeMenu();
 			
 			System.out.printf("\nDigite o número da atividade desejada: ");
 			
@@ -53,7 +53,7 @@ public class Interface {
 					break;
 					
 				case 1:
-					inter.WriteClientAccountMenu("Adicionar", 1);
+					inter.writeClientAccountMenu("Adicionar", 1);
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -63,7 +63,7 @@ public class Interface {
 					break;
 					
 				case 2:
-					inter.WriteClientAccountMenu("Remover", 2);
+					inter.writeClientAccountMenu("Remover", 2);
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -73,7 +73,7 @@ public class Interface {
 					break;
 				
 				case 3:
-					inter.WriteClientAccountMenu("Listar", 3);
+					inter.writeClientAccountMenu("Listar", 3);
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -83,7 +83,7 @@ public class Interface {
 					break;
 				
 				case 4:
-					inter.WriteExecuteMenu("Dep");
+					inter.writeExecuteMenu("Dep");
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -93,7 +93,7 @@ public class Interface {
 					break;	
 					
 				case 5:
-					inter.WriteExecuteMenu("Saq");
+					inter.writeExecuteMenu("Saq");
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -103,7 +103,7 @@ public class Interface {
 					break;
 					
 				case 6:
-					inter.WriteExecuteMenu("Transf");
+					inter.writeExecuteMenu("Transf");
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -113,7 +113,7 @@ public class Interface {
 					break;
 					
 				case 7:
-					inter.WriteSaldoMenu();
+					inter.writeSaldoMenu();
 					
 					try {
 						System.in.read();
@@ -160,7 +160,7 @@ public class Interface {
 	
 	
 	
-	private void WriteSaldoMenu() {
+	private void writeSaldoMenu() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("\nConsulta de Saldo.");
 		System.out.printf("Conta nº: ");
@@ -174,7 +174,7 @@ public class Interface {
 
 
 	@SuppressWarnings("resource")
-	private void WriteExecuteMenu(String method) {
+	private void writeExecuteMenu(String method) {
 		Scanner in = new Scanner(System.in);
 		
 		if (method.equals("Dep")) {
@@ -240,7 +240,7 @@ public class Interface {
 	
 	
 	@SuppressWarnings("resource")
-	private void WriteClientAccountMenu(String action, int whatToDo) {
+	private void writeClientAccountMenu(String action, int whatToDo) {
 
 		Scanner in = new Scanner(System.in);
 		int selectedOption;
@@ -393,7 +393,7 @@ public class Interface {
 	}
 
 
-	private void WriteMenu() {
+	private void writeMenu() {
 		System.out.println(new String(new char[ 55 ]).replace('\0', '_'));
 		System.out.println("O que você deseja?\n");
 		

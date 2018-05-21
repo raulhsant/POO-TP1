@@ -4,13 +4,14 @@
 	
 	CANCELADO -- Implementar Event Listeners no Menu para ocupar as janelas necessárias
 	
-	Criar CUI para utilização via console.
+	FEITO -- Criar CUI para utilização via console.
 	
-	COLOCAR OPÇÃO PARA VOLTAR EM QUALQUER PASSO DA UTILIZAÇÃO!
+	NÃO É NECESSÁRIO -- Remover "return null" das funções caso as mesmas funcionem para evitar NullPointerException.
 	
+	FEITO -- Criar método main de teste para checar se todos os métodos funcionam
 	
-	Remover "return null" das funções caso as mesmas funcionem para evitar NullPointerException.
-	
-
+	-- COLOCAR OPÇÃO PARA VOLTAR EM QUALQUER PASSO DA UTILIZAÇÃO!
 	-- Checar se CPF/CNPJ é valido 
-	-- Criar método main de teste para checar se todos os métodos funcionam
+	-- Procurar por Bugs
+	
+	

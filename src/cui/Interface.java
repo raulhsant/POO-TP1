@@ -2,13 +2,19 @@ package cui;
 
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
 import banco.Banco;
 import banco.Cliente;
 import banco.Conta;
+import banco.Movimentacao;
 
 public class Interface {
 	
@@ -125,6 +131,20 @@ public class Interface {
 					break;
 					
 				case 8:
+					try {
+						inter.writeExtractMenu();
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						System.out.println("Error ocnverting date!");
+					}
+					
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 				
 				case 9:
@@ -160,6 +180,172 @@ public class Interface {
 	
 	
 	
+	@SuppressWarnings("resource")
+	private void writeExtractMenu() throws ParseException {
+		Scanner in = new Scanner(System.in);
+		int selectedOption,contaId;
+		
+		GregorianCalendar startDate, endDate;
+		
+		DateFormat newFormatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+		System.out.println("\nConsulta de Extrato.");
+		System.out.println("\nVocê deseja consultar o extrato: \n");
+		System.out.println("1 - Do mês\n2 - A partir de uma data\n3 - De um período Específico\n0 - Voltar");
+		System.out.printf("\nSua opção: ");
+		
+		selectedOption = in.nextInt();
+		String trace = new String(new char[ 52 ]).replace('\0', '-');
+		
+		switch(selectedOption) {
+		
+			default:
+				System.out.println("Não foi possível identificar a opção digitada, tente novamente.");
+				try {
+					System.in.read();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+				
+			case 0:
+				System.out.println("\nPressione ENTER para continuar");
+				break;
+				
+			case 1:
+				
+				System.out.printf("\nExtrato do mês.\n Conta nº: ");
+				contaId = in.nextInt();
+				
+//				List<Movimentacao> movList = banco.accountExtract(contaId);
+				
+				System.out.println("");
+				System.out.println(trace);
+				System.out.println(String.format("Extrato do mês da conta %d", contaId));
+								
+				for (Movimentacao mov : banco.accountExtract(contaId)) {
+					System.out.println(trace);
+					
+					DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss z");
+					
+					System.out.printf("Data da movimentação: ");
+					System.out.println(formatter.format(mov.getDataMov().getTime()));
+					
+					System.out.printf("\nDescrição: \n   ");
+					System.out.println(mov.getDescricao());
+					System.out.printf("\nTipo de movimentação: %c \t Valor: %.2f\n", mov.getDebitoCredito(), mov.getValor());
+					
+				}
+				System.out.println(trace);
+				System.out.printf("\tSaldo atual: %.2f\n", banco.accountBalance(contaId));
+				System.out.println(trace);
+				System.out.println("\nPressione ENTER para continuar");
+				break;
+				
+			case 2:
+				
+				in.nextLine();
+				System.out.printf("\nExtrato a Partir de uma data.\n A partir de (dd/mm/yyyy): ");
+				String data = in.nextLine();	
+				
+				System.out.printf("\nExtrato a partir de %s da conta: ", data);
+				contaId= in.nextInt();
+				
+				System.out.println("");
+				System.out.println(trace);
+				System.out.println(String.format("Extrato da conta %d a partir de %s", contaId, data));
+				
+				startDate =  new GregorianCalendar();
+			
+//				DateFormat newFormatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+				Date date = (Date)newFormatter.parse(data);
+				
+				startDate.setTime(date);
+				
+//				System.out.println(startDate.get(GregorianCalendar.DATE));
+//				System.out.println(startDate.get(GregorianCalendar.MONTH));
+//				System.out.println(startDate.get(GregorianCalendar.YEAR));
+								
+				for (Movimentacao mov : banco.accountExtract(contaId, startDate)) {
+					System.out.println(trace);
+					
+					DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss z");
+					
+					System.out.printf("Data da movimentação: ");
+					System.out.println(formatter.format(mov.getDataMov().getTime()));
+					
+					System.out.printf("\nDescrição: \n   ");
+					System.out.println(mov.getDescricao());
+					System.out.printf("\nTipo de movimentação: %c \t Valor: %.2f\n", mov.getDebitoCredito(), mov.getValor());
+					
+				}
+				System.out.println(trace);
+				System.out.printf("\tSaldo atual: %.2f\n", banco.accountBalance(contaId));
+				System.out.println(trace);
+				System.out.println("\nPressione ENTER para continuar");
+				break;
+				
+			case 3:
+				
+				in.nextLine();
+				System.out.printf("\nExtrato de um período específico.\n\nA partir de (dd/mm/yyyy): ");
+				String dataIn = in.nextLine();	
+				
+				System.out.printf("Até (dd/mm/yyyy): ");
+				String dataFin = in.nextLine();	
+				
+				System.out.printf("\nExtrato de %s a %s da conta: ", dataIn, dataFin);
+				contaId= in.nextInt();
+				
+				System.out.println("");
+				System.out.println(trace);
+				System.out.println(String.format("Extrato da conta %d de %s a %s", contaId, dataIn, dataFin));
+				
+				startDate =  new GregorianCalendar();
+				endDate = new GregorianCalendar();
+				
+//				DateFormat newFormatter = new SimpleDateFormat("dd/MM/yyyy");
+				
+				Date dateAux = (Date)newFormatter.parse(dataIn);
+				startDate.setTime(dateAux);
+				dateAux = (Date)newFormatter.parse(dataFin);
+				endDate.setTime(dateAux);
+				
+//				System.out.println(startDate.get(GregorianCalendar.DATE));
+//				System.out.println(startDate.get(GregorianCalendar.MONTH));
+//				System.out.println(startDate.get(GregorianCalendar.YEAR));
+								
+				for (Movimentacao mov : banco.accountExtract(contaId, startDate, endDate)) {
+					System.out.println(trace);
+					
+					DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss z");
+					
+					System.out.printf("Data da movimentação: ");
+					System.out.println(formatter.format(mov.getDataMov().getTime()));
+					
+					System.out.printf("\nDescrição: \n   ");
+					System.out.println(mov.getDescricao());
+					System.out.printf("\nTipo de movimentação: %c \t Valor: %.2f\n", mov.getDebitoCredito(), mov.getValor());
+					
+				}
+				System.out.println(trace);
+				System.out.printf("\tSaldo atual: %.2f\n", banco.accountBalance(contaId));
+				System.out.println(trace);
+				System.out.println("\nPressione ENTER para continuar");
+				
+				break;
+				
+		}
+
+		
+		
+	}
+
+
+
+	@SuppressWarnings("resource")
 	private void writeSaldoMenu() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("\nConsulta de Saldo.");
@@ -173,6 +359,8 @@ public class Interface {
 
 
 
+	
+	
 	@SuppressWarnings("resource")
 	private void writeExecuteMenu(String method) {
 		Scanner in = new Scanner(System.in);

@@ -113,6 +113,15 @@ public class Interface {
 					break;
 					
 				case 7:
+					inter.WriteSaldoMenu();
+					
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					break;
 					
 				case 8:
@@ -151,6 +160,19 @@ public class Interface {
 	
 	
 	
+	private void WriteSaldoMenu() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("\nConsulta de Saldo.");
+		System.out.printf("Conta nº: ");
+		int contaId = in.nextInt();
+		
+		System.out.printf("\nA conta %d tem um saldo de %.2f\n",contaId, banco.accountBalance(contaId));
+		
+		System.out.println("Pressione ENTER para continuar");
+	}
+
+
+
 	@SuppressWarnings("resource")
 	private void WriteExecuteMenu(String method) {
 		Scanner in = new Scanner(System.in);

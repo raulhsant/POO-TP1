@@ -147,8 +147,10 @@ public class Banco implements Serializable{
 	
 	public Double accountBalance(int id) {
 		for (Conta conta : this.contas) {
-			return conta.getSaldo();
+			if(conta.getNumConta() == id)
+				return conta.getSaldo();
 		}
+		
 		return null;
 	}
 	

@@ -87,7 +87,7 @@ public class Conta implements Serializable{
 		List <Movimentacao> toReturnList =  new ArrayList<Movimentacao>();
 		
 		for (Movimentacao mov : this.movimentacoes) {
-			if (mov.getDataMov().getTimeInMillis() >= startDate.getTimeInMillis() && mov.getDataMov().getTimeInMillis() <= startDate.getTimeInMillis()) {
+			if (mov.getDataMov().getTimeInMillis() >= startDate.getTimeInMillis() && mov.getDataMov().getTimeInMillis() <= endDate.getTimeInMillis()) {
 				toReturnList.add(mov);
 			}
 		}

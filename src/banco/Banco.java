@@ -156,21 +156,25 @@ public class Banco implements Serializable{
 	
 	public List<Movimentacao> accountExtract(int id) {
 		for (Conta conta : this.contas) {
-			return conta.getExtract();
+			if (conta.getNumConta() == id)
+				return conta.getExtract();
 		}
 		return null;
 	}
 	
 	public List<Movimentacao> accountExtract(int id, GregorianCalendar startDate) {
+		
 		for (Conta conta : this.contas) {
-			return conta.getExtract(startDate);
+			if (conta.getNumConta() == id)
+				return conta.getExtract(startDate);
 		}
 		return null;
 	}
 	
 	public List<Movimentacao> accountExtract(int id, GregorianCalendar startDate, GregorianCalendar endDate) {
 		for (Conta conta : this.contas) {
-			return conta.getExtract(startDate, endDate);
+			if (conta.getNumConta() == id)
+				return conta.getExtract(startDate, endDate);
 		}
 		return null;
 	}

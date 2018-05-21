@@ -106,7 +106,7 @@ public class Banco implements Serializable{
 					contaFrom.toDebit(value, String.format("Transferência para conta %d", contaTo.getNumConta()));
 					contaTo.toCredit(value, String.format("Transferência da conta %d", contaFrom.getNumConta()));
 					
-					System.out.println(String.format("Transferência de %.2f efetuada da conta %d para a conta %d", value, idFrom, idTo));
+					System.out.println(String.format("Transferência de %.2f efetuada da conta %d para a conta %d.", value, idFrom, idTo));
 				}
 			} else if (conta.getNumConta() == idTo) {
 				contaTo = conta;

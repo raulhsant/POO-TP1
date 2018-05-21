@@ -119,6 +119,28 @@ public class Interface {
 					break;
 				
 				case 9:
+					banco.bankRatePayment();
+					System.out.println("\nTarifas cobradas com sucesso!\nPressione ENTER para continuar.");
+					
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case 10:
+					
+					banco.CpmfPayment();
+					System.out.println("\nCPMF cobrado com sucesso!\nPressione ENTER para continuar.");
+					
+					try {
+						System.in.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 
 			}
@@ -398,7 +420,7 @@ public class Interface {
 		linhas.add(traceAux);
 		linhas.add("|" + whitespace +  " Cobrar" + whitespace + "|");
 		linhas.add(traceAux);
-		linhas.add("|         7 - Tarifas           8 - CPMF          |");
+		linhas.add("|        9 - Tarifas           10 - CPMF          |");
 		linhas.add(trace);
 		
 		

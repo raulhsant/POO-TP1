@@ -16,7 +16,7 @@ import banco.Cliente;
 import banco.Conta;
 import banco.Movimentacao;
 
-public class Interface {
+public class CUInterface {
 	
 	private static Banco banco;
 	
@@ -24,7 +24,7 @@ public class Interface {
 	public static void main(String[] args) {
 		
 //		System.out.println("Running");
-		Interface inter =  new Interface();
+		CUInterface cui =  new CUInterface();
 		banco = Banco.readFile();
 		int selectedOption;
 		Boolean close =  false;
@@ -34,7 +34,7 @@ public class Interface {
 		
 		while (!close) {
 	//		System.out.println(String.format("Informações do banco \"%s\" carregadas com sucesso.", banco.getNomeBanco()));
-			inter.writeMenu();
+			cui.writeMenu();
 			
 			System.out.printf("\nDigite o número da atividade desejada: ");
 			
@@ -59,7 +59,7 @@ public class Interface {
 					break;
 					
 				case 1:
-					inter.writeClientAccountMenu("Adicionar", 1);
+					cui.writeClientAccountMenu("Adicionar", 1);
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -69,7 +69,7 @@ public class Interface {
 					break;
 					
 				case 2:
-					inter.writeClientAccountMenu("Remover", 2);
+					cui.writeClientAccountMenu("Remover", 2);
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -79,7 +79,7 @@ public class Interface {
 					break;
 				
 				case 3:
-					inter.writeClientAccountMenu("Listar", 3);
+					cui.writeClientAccountMenu("Listar", 3);
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -89,7 +89,7 @@ public class Interface {
 					break;
 				
 				case 4:
-					inter.writeExecuteMenu("Dep");
+					cui.writeExecuteMenu("Dep");
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -99,7 +99,7 @@ public class Interface {
 					break;	
 					
 				case 5:
-					inter.writeExecuteMenu("Saq");
+					cui.writeExecuteMenu("Saq");
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -109,7 +109,7 @@ public class Interface {
 					break;
 					
 				case 6:
-					inter.writeExecuteMenu("Transf");
+					cui.writeExecuteMenu("Transf");
 					try {
 						System.in.read();
 					} catch (IOException e) {
@@ -119,7 +119,7 @@ public class Interface {
 					break;
 					
 				case 7:
-					inter.writeSaldoMenu();
+					cui.writeSaldoMenu();
 					
 					try {
 						System.in.read();
@@ -132,7 +132,7 @@ public class Interface {
 					
 				case 8:
 					try {
-						inter.writeExtractMenu();
+						cui.writeExtractMenu();
 					} catch (ParseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3922927079725575913L;
 	
 	private String nomeCliente;
@@ -21,8 +18,6 @@ public class Cliente implements Serializable{
 		this.endereco = endereco;
 		this.fone = fone;
 	}
-	
-	//TODO: Implements other methods
 
 	public String getNomeCliente() {
 		return nomeCliente;
@@ -48,7 +43,5 @@ public class Cliente implements Serializable{
 	public void setFone(String fone) {
 		this.fone = fone;
 	}
-	
-	
 
 }

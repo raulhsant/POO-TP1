@@ -1,18 +1,13 @@
 package banco;
 
 import java.io.Serializable;
-//import java.time.LocalDate;
-//import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-//import java.util.TimeZone;
 
 public class Conta implements Serializable{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 577928927645938285L;
 	
 	private int numConta;
@@ -20,13 +15,11 @@ public class Conta implements Serializable{
 	private Cliente cliente;
 	private List<Movimentacao> movimentacoes;
 
-	//Maybe wont work this way
 	private static int proxNumConta = 1;
 	
 	public static void setproxNumConta(int numContas) {
 		proxNumConta = numContas+1; 
 	}
-	//TODO: Implements other methods
 	
 	public Conta(Cliente cliente) {
 		super();
@@ -71,7 +64,6 @@ public class Conta implements Serializable{
 			
 			return this.saldo;
 		} 
-		//if saldo < valor return null
 		return (Double) null;
 	}
 	
@@ -102,18 +94,13 @@ public class Conta implements Serializable{
 	
 	//get extract from current month
 	public List<Movimentacao> getExtract(){
-//		 	TimeZone tz = TimeZone.getTimeZone("America/Sao_Paulo");
-//			TimeZone.setDefault(tz);
+
 		    GregorianCalendar actualDate = new GregorianCalendar();
 			int month = actualDate.get(GregorianCalendar.MONTH);
-//		    LocalDate localDate = actualDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//		    int month = actualDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue();
-		    
 		    List<Movimentacao> toReturn =  new ArrayList<Movimentacao>();
 		    
 		    for (Movimentacao mov : this.movimentacoes) {
-		    	//Checks if movimentacao mov was in the current month
-//		    	if (month == mov.getDataMov().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue()) {
+		    	
 		    	if(month == mov.getDataMov().get(GregorianCalendar.MONTH)) {
 		    		toReturn.add(mov);
 		    	}
@@ -121,9 +108,5 @@ public class Conta implements Serializable{
 		    
 	    	return toReturn;	    
 	}
-	
-	
-	
-	
 
 }

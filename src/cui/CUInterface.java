@@ -33,7 +33,7 @@ public class CUInterface {
 		
 		
 		while (!close) {
-	//		System.out.println(String.format("Informações do banco \"%s\" carregadas com sucesso.", banco.getNomeBanco()));
+			
 			cui.writeMenu();
 			
 			System.out.printf("\nDigite o número da atividade desejada: ");
@@ -217,9 +217,7 @@ public class CUInterface {
 				
 				System.out.printf("\nExtrato do mês.\n Conta nº: ");
 				contaId = in.nextInt();
-				
-//				List<Movimentacao> movList = banco.accountExtract(contaId);
-				
+						
 				System.out.println("");
 				System.out.println(trace);
 				System.out.println(String.format("Extrato do mês da conta %d", contaId));
@@ -258,16 +256,11 @@ public class CUInterface {
 				
 				startDate =  new GregorianCalendar();
 			
-//				DateFormat newFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 				Date date = (Date)newFormatter.parse(data);
 				
 				startDate.setTime(date);
-				
-//				System.out.println(startDate.get(GregorianCalendar.DATE));
-//				System.out.println(startDate.get(GregorianCalendar.MONTH));
-//				System.out.println(startDate.get(GregorianCalendar.YEAR));
-								
+										
 				for (Movimentacao mov : banco.accountExtract(contaId, startDate)) {
 					System.out.println(trace);
 					
@@ -306,16 +299,10 @@ public class CUInterface {
 				startDate =  new GregorianCalendar();
 				endDate = new GregorianCalendar();
 				
-//				DateFormat newFormatter = new SimpleDateFormat("dd/MM/yyyy");
-				
 				Date dateAux = (Date)newFormatter.parse(dataIn);
 				startDate.setTime(dateAux);
 				dateAux = (Date)newFormatter.parse(dataFin);
 				endDate.setTime(dateAux);
-				
-//				System.out.println(startDate.get(GregorianCalendar.DATE));
-//				System.out.println(startDate.get(GregorianCalendar.MONTH));
-//				System.out.println(startDate.get(GregorianCalendar.YEAR));
 								
 				for (Movimentacao mov : banco.accountExtract(contaId, startDate, endDate)) {
 					System.out.println(trace);
@@ -357,9 +344,6 @@ public class CUInterface {
 		System.out.println("Pressione ENTER para continuar");
 	}
 
-
-
-	
 	
 	@SuppressWarnings("resource")
 	private void writeExecuteMenu(String method) {
@@ -470,23 +454,13 @@ public class CUInterface {
 				in.nextLine();
 				System.out.printf("CPF/CNPJ: ");
 				String cpf = in.nextLine();
-			
-//				List<Cliente> clientList = banco.getClientes();
 				
 				Boolean removed = banco.removeClient(cpf);
 				
-//				for (Cliente client : clientList) {
-//					if(client.getCpfCnpj().equals(cpf))
-//						System.out.println(String.format("Cliente %s removido com sucesso. \nPressione ENTER para continuar", client.getNomeCliente()));
-////						else {
-////							System.out.printf("Deu ruim %s\n", client.getCpfCnpj());
-////						}	
-//				}
 				if(removed == false)
 					System.out.println("\nCliente não encontrado ou não pode ser removido.\nPressione ENTER para continuar");
 				else
 					System.out.println("\nCliente removido com sucesso.\nPressione ENTER para continuar");
-//				in.nextLine();
 				
 			} else if (whatToDo == 3) {
 				//asks for nothing, shows list
@@ -508,7 +482,6 @@ public class CUInterface {
 				
 				System.out.println(trace);
 				System.out.println("\nPressione ENTER para continuar");
-//				in.nextLine();
 			}
 			
 		} else if (selectedOption == 2) {
@@ -567,7 +540,6 @@ public class CUInterface {
 			}
 		} else if(selectedOption == 0) {			
 			System.out.println("\nPressione ENTER para continuar");
-//			in.nextLine();
 		} else {
 			System.out.println("Não foi possível identificar a opção digitada, tente novamente.");
 			try {
@@ -585,10 +557,6 @@ public class CUInterface {
 		System.out.println(new String(new char[ 55 ]).replace('\0', '_'));
 		System.out.println("O que você deseja?\n");
 		
-//		System.out.println("\tAdicionar:\n 1 - Cliente\t 2 - Conta\n");
-//		System.out.println("Remover:\n 3 - Cliente\t 4 - Conta\n");
-//		System.out.println("Listar:\n 5 - Cliente\t 6 - Conta\n");
-		
 		List<String> linhas = new ArrayList<String> ();
 		String linha = "|   1 - Adicionar    2 - Remover    3 - Listar    |";
 					
@@ -604,8 +572,7 @@ public class CUInterface {
 		linhas.add(linha);
 		linhas.add(traceAux);
 		linhas.add("| " +  whitespace + "Cliente ou Conta" + whitespace + "|");
-		linhas.add(trace);
-//		System.out.println(linhas.get(3).length());
+		linhas.add(trace);	
 		
 		
 		whitespace = new String(new char[ (linhas.get(0).length())/2 - 4 ]).replace('\0', ' ');
@@ -625,6 +592,7 @@ public class CUInterface {
 		linhas.add("|         7 - Saldo           8 - Extrato         |");
 		linhas.add(trace);
 		
+		
 		whitespace = new String(new char[ (linhas.get(0).length())/2 - 4 ]).replace('\0', ' ');
 		
 		linhas.add(traceAux);
@@ -640,22 +608,6 @@ public class CUInterface {
 		linhas.add("|" + whitespace +  " 0 - Sair e Salvar Alterações" + whitespace + "|");
 		linhas.add(trace);
 		
-//		System.out.println(traceAux);
-//		System.out.println(linhas.get(0));
-//		System.out.println(traceAux);
-////		System.out.println();
-//		System.out.println(linhas.get(1));
-//		System.out.println(trace);
-		
-		
-//		System.out.println(traceAux);
-//		System.out.println(linhas.get(2));
-//		System.out.println(traceAux);
-//		System.out.println(linhas.get(3));
-//		System.out.println(trace);
-		
-//		System.out.println(traceAux);
-//		System.out.println(linhas.get(4));
 		
 		for(String line : linhas)
 			System.out.println(line);

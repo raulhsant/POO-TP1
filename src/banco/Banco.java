@@ -15,12 +15,7 @@ import java.util.List;
 
 public class Banco implements Serializable{
 	
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4106517860187051559L;
-	
 	
 	private String nomeBanco;
 	private List <Cliente> clientes;
@@ -35,9 +30,6 @@ public class Banco implements Serializable{
 		
 	}
 	
-//	public Banco() {
-//		// TODO Auto-generated constructor stub
-//	}
 
 	public void addClient(Cliente cliente) {
 		this.clientes.add(cliente);
@@ -98,6 +90,7 @@ public class Banco implements Serializable{
 		
 		Conta contaTo = new Conta();
 		Conta contaFrom = new Conta();
+		
 		for (Conta conta : this.contas) {
 			if (conta.getNumConta() == idFrom ) {
 				contaFrom = conta;
@@ -259,78 +252,6 @@ public class Banco implements Serializable{
 		}
 	}
 	
-//	//To save multiple banks to file
-//	public void writeFile(List<Banco> bancos) {
-//		
-//		try {
-//			FileOutputStream f = new FileOutputStream(new File("BancosAll.txt"));
-//			ObjectOutputStream o = new ObjectOutputStream(f);
-//			for (Banco banco : bancos) {
-//				// Write objects to file
-//				o.writeObject(banco);
-//			}
-//			o.close();
-//			f.close();
-//		} catch (IOException e) {
-//			System.out.println("Error initializing stream");
-//		}
-//	}
-//	//Save the names of the banks to file
-//	public void writeFile(List<String> bancosNomes, Boolean justNames) {
-//		
-//		try {
-//			FileOutputStream f = new FileOutputStream(new File("ListBancos.txt"));
-//			ObjectOutputStream o = new ObjectOutputStream(f);
-//
-//			// Write objects to file
-//			o.writeObject(bancosNomes);
-//
-//			o.close();
-//			f.close();
-//		} catch (IOException e) {
-//			System.out.println("Error initializing stream");
-//		}
-//	}
-	
-	//TODO: Implementar métodos de leitura e gravação em arquivo.
-	
-//		public static void main(String[] args) {
-//	
-//			Banco b1 = new Banco("TesteBanco");
-//			b1.newAccount(new Cliente("José", "11122233345", "Rua do carai", "123456789"));
-//	
-//			try {
-//				FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
-//				ObjectOutputStream o = new ObjectOutputStream(f);
-//	
-//				// Write objects to file
-//				o.writeObject(b1);
-//	
-//				o.close();
-//				f.close();
-//	
-//				FileInputStream fi = new FileInputStream(new File("myObjects.txt"));
-//				ObjectInputStream oi = new ObjectInputStream(fi);
-//	
-//				// Read objects
-//				Banco br1 = (Banco) oi.readObject();
-//	
-//				System.out.println(br1);
-//	
-//	
-//				oi.close();
-//				fi.close();
-//	
-//			} catch (FileNotFoundException e) {
-//				System.out.println("File not found");
-//			} catch (IOException e) {
-//				System.out.println("Error initializing stream");
-//			} catch (ClassNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-
 		public void setNomeBanco(String nomeBanco) {
 			this.nomeBanco = nomeBanco;
 		}

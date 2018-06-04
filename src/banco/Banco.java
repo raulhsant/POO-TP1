@@ -49,7 +49,7 @@ public class Banco implements Serializable{
 		
 		for (Conta conta : this.contas) {
 			if(conta.getCliente().getCpfCnpj().equals(cpfCnpj)) {
-				System.out.println(String.format("O Cliente não pode ser exlcuido pois possui a conta %d. ", conta.getNumConta()));
+				System.out.println(String.format("O Cliente nÃ£o pode ser exlcuido pois possui a conta %d. ", conta.getNumConta()));
 				canBeRemoved =  false;
 			}
 		}
@@ -69,9 +69,9 @@ public class Banco implements Serializable{
 		
 		for (Conta conta : this.contas) {
 			if (conta.getNumConta() == id) {
-				conta.toCredit(value, "Depósito");
+				conta.toCredit(value, "DepÃ³sito");
 				
-				System.out.println(String.format("Depósito de %.2f efetuado na conta %d", value, id));
+				System.out.println(String.format("DepÃ³sito de %.2f efetuado na conta %d", value, id));
 			}
 		}	
 	}
@@ -96,19 +96,19 @@ public class Banco implements Serializable{
 				contaFrom = conta;
 				
 				if (contaTo.getNumConta() != 0) {
-					contaFrom.toDebit(value, String.format("Transferência para conta %d", contaTo.getNumConta()));
-					contaTo.toCredit(value, String.format("Transferência da conta %d", contaFrom.getNumConta()));
+					contaFrom.toDebit(value, String.format("TransferÃªncia para conta %d", contaTo.getNumConta()));
+					contaTo.toCredit(value, String.format("TransferÃªncia da conta %d", contaFrom.getNumConta()));
 					
-					System.out.println(String.format("Transferência de %.2f efetuada da conta %d para a conta %d.", value, idFrom, idTo));
+					System.out.println(String.format("TransferÃªncia de %.2f efetuada da conta %d para a conta %d.", value, idFrom, idTo));
 				}
 			} else if (conta.getNumConta() == idTo) {
 				contaTo = conta;
 				
 				if (contaFrom.getNumConta() != 0) {
-					contaFrom.toDebit(value, String.format("Transferência para conta %d", contaTo.getNumConta()));
-					contaTo.toCredit(value, String.format("Transferência da conta %d", contaFrom.getNumConta()));
+					contaFrom.toDebit(value, String.format("TransferÃªncia para conta %d", contaTo.getNumConta()));
+					contaTo.toCredit(value, String.format("TransferÃªncia da conta %d", contaFrom.getNumConta()));
 					
-					System.out.println(String.format("Transferência de %.2f efetuada da conta %d para a conta %d", value, idFrom, idTo));
+					System.out.println(String.format("TransferÃªncia de %.2f efetuada da conta %d para a conta %d", value, idFrom, idTo));
 				}
 			}
 		}
@@ -117,7 +117,7 @@ public class Banco implements Serializable{
 	
 	public void bankRatePayment() {
 		for (Conta conta : this.contas) {
-			conta.toDebit(15, "Cobrança de Tarifa");
+			conta.toDebit(15, "CobranÃ§a de Tarifa");
 		}
 	}
 	
@@ -127,14 +127,14 @@ public class Banco implements Serializable{
 	    startDate.set(GregorianCalendar.DATE, new GregorianCalendar().get(GregorianCalendar.DATE) - 7);
 	    
 		for (Conta conta : this.contas) {
-			List<Movimentacao> moviments =  conta.getExtract();
+			List<Movimentacao> moviments =  conta.getExtract(startDate);
 			double totalDebit = 0;
 			for (Movimentacao mov : moviments) {
 				if (mov.getDebitoCredito() == 'D') {
 					totalDebit += mov.getValor();
 				}
 			}
-			conta.toDebit(totalDebit* 0.0038, "Cobrança de CPMF");
+			conta.toDebit(totalDebit* 0.0038, "CobranÃ§a de CPMF");
 		}
 	}
 	
@@ -196,11 +196,11 @@ public class Banco implements Serializable{
 
 			o.close();
 			f.close();
-			System.out.println("Alterações salvas com sucesso!\n");
+			System.out.println("AlteraÃ§Ãµes salvas com sucesso!\n");
 			
 		} catch (IOException e) {
 			System.out.println("Error initializing stream");
-			System.out.println("\nNão foi possível salvar as alterações!\n");
+			System.out.println("\nNÃ£o foi possÃ­vel salvar as AlteraÃ§Ãµes!\n");
 		}
 	}
 	
@@ -225,7 +225,7 @@ public class Banco implements Serializable{
 			System.out.println("Error initializing stream");
 //			if (createBankObjectWithDefaultName())
 //			System.out.println("Default Bank Created. Try again!");
-//			JOptionPane.showMessageDialog(null, "Banco padrão criado.", "Erro ao iniciar banco", 1);
+//			JOptionPane.showMessageDialog(null, "Banco padrÃ£o criado.", "Erro ao iniciar banco", 1);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

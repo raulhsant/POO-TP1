@@ -1,0 +1,17 @@
+	FEITO -- Implementar métodos de leitura e gravação em arquivo.
+	
+	CANCELADO -- Montar Interface com WindowBuilder
+	
+	CANCELADO -- Implementar Event Listeners no Menu para ocupar as janelas necessárias
+	
+	FEITO -- Criar CUI para utilização via console.
+	
+	NÃO É NECESSÁRIO -- Remover "return null" das funções caso as mesmas funcionem para evitar NullPointerException.
+	
+	FEITO -- Criar método main de teste para checar se todos os métodos funcionam
+	
+	-- COLOCAR OPÇÃO PARA VOLTAR EM QUALQUER PASSO DA UTILIZAÇÃO!
+	-- Checar se CPF/CNPJ é valido 
+	-- Procurar por Bugs
+	
+	
